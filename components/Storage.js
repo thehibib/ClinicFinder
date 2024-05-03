@@ -42,4 +42,6 @@ export async function getDataStr(key){
 };
 
 
-
+//<Button text='Module 2!' 
+// onPress={async () => alert(await getDataStr('data'))} 
+// color='#aac961'/>

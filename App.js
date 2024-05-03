@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View} from 'react-native';
+import {TouchableWithoutFeedback, StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import Button from './components/Button.js';
 import TextBox from './components/TextBox.js';
 import {schedulePushNotification} from './components/Notification.js';
+import {getLocation} from './components/Location.js';
 import {storeDataStr, getDataStr, storeDataObj, getDataObj} from './components/Storage.js';
 
 
@@ -15,12 +16,12 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen
           name="Alpha"
-          component={Start}
+          component={Welcome}
           options={{headerShown: false}}
         />
         <Stack.Screen
           name="Beta"
-          component={ScreenBeta}
+          component={Defaults}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
@@ -29,42 +30,53 @@ export default function App() {
 }
 
 
-const Start = ({navigation}) => {
-  
+const Welcome = ({navigation}) => {
   return(
-    <View style={styles.container}>
-      <Text style={styles.bigText}>
-        Clinic Finder
-      </Text>
-      <View style={styles.smallContainer}>
-        <Button text='Screen 1' onPress={() => navigation.navigate('Beta')} color='#aac961'/>
-        <Button text='Module 2!' 
-          onPress={async () => alert(await getDataStr('data'))} 
-          color='#aac961'/>
-        <StatusBar style="auto" />
+    <TouchableWithoutFeedback onPress ={() => navigation.navigate('Beta')}>
+      <View style={styles.container}>
+        <View style={{ flex: 3/2, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={styles.bigText}>
+          Clinic Finder
+        </Text>
+        </View>
+        <View style={styles.smallContainer}>
+          <Text>Tap to Start</Text>
+          <StatusBar style="auto" />
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
   
 }
-const ScreenBeta = ({navigation}) => {
+const Defaults = ({navigation}) => {
   return(
     <View style={styles.container}>
-      <Button text='Screen 2' onPress={() => navigation.navigate('Alpha')} color='#aac961'/>
-      <StatusBar style="auto" />
-      <Button text='ello' onPress={async () => { 
-        await schedulePushNotification({
-          title:'Clinic A Updates', 
-          body:'A is officially open! Tap to learn more', 
-          data:'goes here'
-        });
-      }} color='#aac961'/>
-      {/* <Notification title='Clinic A Updates' body='A is officially open! Tap to learn more' data='goes here' /> */}
+      <View style={{alignItems: "flex-start", flex: 3/8}}>
+        <Text style={[styles.leftText, {fontSize: 38}]}>
+          We use defaults
+        </Text>
+        <Text style={[styles.leftText, {fontSize: 20, paddingTop: 10}]}>
+          To start searching the moment you open the app, wherever you are. {"\n"}{"\n"}
+          We use presets found through your phone to find the following: {"\n"}{"\n"}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+        </Text>
+      </View>
+      <View style={{alignItems: "flex-start", flex: 5/16}}>
+        <Button text='Screen 2' onPress={() => navigation.navigate('Alpha')} color='#aac961'/>
+        <StatusBar style="auto" />
+        <Button text='ello' onPress={async () => { 
+          await schedulePushNotification({
+            title:'Clinic A Updates', 
+            body:'A is officially open! Tap to learn more', 
+            data:'goes here'
+          });
+        }} color='#aac961' theme = 'null'/>
+        <Button text='hacker man' 
+          onPress={async () => alert(await getLocation())}
+          color='#aac961'/>
+      </View>
     </View>
   )
-
-
-
 }
 
 
@@ -80,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1/2,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     
   },
   bigText: {
@@ -89,6 +101,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Cochin',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  leftText: {
+    fontFamily: 'Cochin',
+    textAlign: 'left',
+    width: 400,
+    paddingHorizontal: 50,
+  },
 })
 //ryan fitzpatrick

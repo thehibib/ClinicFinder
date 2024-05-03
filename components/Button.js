@@ -1,19 +1,36 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 
-export default function Button ({text, onPress, color}) {
-    return( 
-        <View style={[styles.centered]}>
-            <Pressable
-                style={[styles.button, styles.centered, {backgroundColor: color}]}
-                onPress = {onPress}
-            >
-                <Text>
-                    {text}
-                </Text>
-            </Pressable>
-        
-        </View>
-    )
+export default function Button ({text, onPress, color, theme}) {
+    if (theme === undefined){
+        return( 
+            <View style={[styles.centered]}>
+                <Pressable
+                    style={[styles.button, styles.centered, {backgroundColor: color}]}
+                    onPress = {onPress}
+                >
+                    <Text>
+                        {text}
+                    </Text>
+                </Pressable>
+            
+            </View>
+        )
+    }
+    else if (theme === 'back'){
+        return( 
+            <View style={[styles.centered]}>
+                <Pressable
+                    style={[styles.button, styles.centered, {backgroundColor: color}]}
+                    onPress = {onPress}
+                >
+                    <Text>
+                        {text}
+                    </Text>
+                </Pressable>
+            
+            </View>
+        )
+    }
 }
    
         
