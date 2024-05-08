@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import {TouchableWithoutFeedback, StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import 'react-native-reanimated'; //needed for SDK 51 bug fix
+
 const Stack = createNativeStackNavigator();
 import Button from './components/Button.js';
 import TextBox from './components/TextBox.js';
@@ -62,18 +64,18 @@ const Defaults = ({navigation}) => {
         </Text>
       </View>
       <View style={{alignItems: "flex-start", flex: 5/16}}>
-        <Button text='Screen 2' onPress={() => navigation.navigate('Alpha')} color='#aac961'/>
+        <Button text='PROCEED WITH DEFAULTS' onPress={() => navigation.navigate('Alpha')} color='#aac961'/>
         <StatusBar style="auto" />
-        <Button text='ello' onPress={async () => { 
+        <Button text='MANUALLY CHANGE PRESETS' onPress={async () => { 
           await schedulePushNotification({
             title:'Clinic A Updates', 
             body:'A is officially open! Tap to learn more', 
             data:'goes here'
           });
-        }} color='#aac961' theme = 'null'/>
-        <Button text='hacker man' 
-          onPress={async () => alert(await getLocation())}
-          color='#aac961'/>
+        }} color='#aac961'/>
+        <Button text='Privacy Details'
+          theme='silent'
+          onPress={async () => alert('lmao we steal ur data')}/>
       </View>
     </View>
   )

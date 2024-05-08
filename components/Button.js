@@ -8,7 +8,7 @@ export default function Button ({text, onPress, color, theme}) {
                     style={[styles.button, styles.centered, {backgroundColor: color}]}
                     onPress = {onPress}
                 >
-                    <Text>
+                    <Text style={{fontWeight: 'bold'}}>
                         {text}
                     </Text>
                 </Pressable>
@@ -24,6 +24,21 @@ export default function Button ({text, onPress, color, theme}) {
                     onPress = {onPress}
                 >
                     <Text>
+                        {text}
+                    </Text>
+                </Pressable>
+            
+            </View>
+        )
+    }
+    if (theme === 'silent'){
+        return(
+            <View style={[styles.centered]}>
+                <Pressable
+                    style={[styles.button, styles.centered, {height: 100}]}
+                    onPress = {onPress}
+                >
+                    <Text style={{color: 'blue'}}>
                         {text}
                     </Text>
                 </Pressable>
