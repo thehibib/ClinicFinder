@@ -19,7 +19,7 @@ export async function searchClinics(setter){
 
     const promises = locClinics.map(clinic => {
         let clinicLoc = encodeURIComponent(clinic.Location)
-        return fetch(`https://geocode.maps.co/search?q=${clinicLoc}&api_key=66593d5bcf87e250296466rbs4db4a8`)
+        return fetch(`https://geocode.maps.co/search?q=${clinicLoc}&api_key=APIKEYWOULDGOHERE`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('bad network response');
